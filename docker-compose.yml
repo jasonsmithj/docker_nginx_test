@@ -1,0 +1,16 @@
+version: '3'
+services:
+  nginx:
+    image: test/nginx:${GIT_HASH}
+    ports:
+      - "80:80"
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: /aws/ecs/test-nginx
+        awslogs-region: ap-northeast-1
+        awslogs-stream-prefix: nginx
+    environment:
+      FASTCGI_PASS: "localhost"
+      SERVER_NAME: "localhost"
+    command: /bin/sh -c "DOLLAR=$$ envsubst < /etc/nginx/conf.d/server.conf.template > /etc/nginx/conf.d/server.conf && nginx -g 'daemon off;'"

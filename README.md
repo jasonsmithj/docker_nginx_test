@@ -1,1 +1,5 @@
 # docker_nginx_test
+
+nginxを作成する際にnginxの設定を環境変数で渡すことで
+develop/staging/productionの環境差分を吸収し、
+同一Dockerリポジトリで共通のコンテナを利用する。
